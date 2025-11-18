@@ -1,0 +1,37 @@
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos de editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.iml
+
+# Archivos temporales
+*.tmp
+*.log
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Screenshots y reportes
+screenshots/
+reports/
+*.png
+*.jpg
+
+# Drivers (si se descargan manualmente)
+drivers/
+*.exe
+
+# Archivos compilados
+*.class
+bin/
+out/
+

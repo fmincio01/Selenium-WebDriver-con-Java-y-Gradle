@@ -1,8 +1,128 @@
-# 🧪 Guía Completa: Selenium WebDriver con Java y Gradle
+# 🧪 Proyecto Selenium WebDriver con Java y Gradle
 
 **Asignatura:** Automatización de Pruebas Funcionales  
 **Tema:** Introducción al Selenium WebDriver - Parte 1  
 **Fecha:** 2025
+
+Este proyecto contiene ejemplos prácticos **básicos e intermedios** de Selenium WebDriver implementados en Java con Gradle.
+
+---
+
+## 🚀 Inicio Rápido
+
+### Requisitos Previos
+
+- Java JDK 11 o superior
+- Gradle 7.x o superior (o usar Gradle Wrapper incluido)
+- Navegador Chrome instalado
+
+### Configuración del Proyecto
+
+1. **Clonar o descargar el proyecto**
+
+2. **Verificar Java y Gradle:**
+```bash
+java -version
+gradle --version
+```
+
+3. **Compilar el proyecto:**
+```bash
+gradle build
+```
+
+4. **Ejecutar los tests:**
+```bash
+gradle test
+```
+
+### Estructura del Proyecto
+
+```
+curso/
+├── build.gradle              # Configuración de Gradle y dependencias
+├── src/
+│   ├── main/java/com/selenium/ejemplos/
+│   │   ├── basicos/          # Ejemplos básicos
+│   │   │   ├── Ejemplo01_NavegacionBasica.java
+│   │   │   ├── Ejemplo02_LocalizadoresBasicos.java
+│   │   │   ├── Ejemplo03_InteraccionesBasicas.java
+│   │   │   └── Ejemplo04_CSSyXPath.java
+│   │   ├── intermedios/      # Ejemplos intermedios
+│   │   │   ├── Ejemplo05_EsperasExplicitas.java
+│   │   │   ├── Ejemplo06_FormulariosCompletos.java
+│   │   │   ├── Ejemplo07_MultiplesVentanas.java
+│   │   │   ├── Ejemplo08_AlertasYPopups.java
+│   │   │   ├── Ejemplo09_ValidacionesYAssertions.java
+│   │   │   └── Ejemplo10_ScreenshotsYReportes.java
+│   │   └── Main.java         # Clase principal
+│   └── test/java/com/selenium/tests/
+│       ├── TestBasico_GoogleSearch.java
+│       └── TestIntermedio_SauceDemo.java
+└── README.md
+```
+
+---
+
+## 📚 Ejemplos Incluidos
+
+### Ejemplos Básicos
+
+1. **Ejemplo01_NavegacionBasica** - Navegación básica, obtener título y URL
+2. **Ejemplo02_LocalizadoresBasicos** - Localizadores por ID, Name, ClassName, TagName
+3. **Ejemplo03_InteraccionesBasicas** - Click, sendKeys, obtener texto y atributos
+4. **Ejemplo04_CSSyXPath** - Uso de CSS Selector y XPath
+
+### Ejemplos Intermedios
+
+5. **Ejemplo05_EsperasExplicitas** - WebDriverWait y ExpectedConditions
+6. **Ejemplo06_FormulariosCompletos** - Formularios, dropdowns, checkboxes, radio buttons
+7. **Ejemplo07_MultiplesVentanas** - Manejo de múltiples ventanas y tabs
+8. **Ejemplo08_AlertasYPopups** - Manejo de alertas JavaScript
+9. **Ejemplo09_ValidacionesYAssertions** - Validaciones y verificaciones
+10. **Ejemplo10_ScreenshotsYReportes** - Captura de pantallas
+
+### Tests con JUnit
+
+- **TestBasico_GoogleSearch** - Test de búsqueda en Google
+- **TestIntermedio_SauceDemo** - Tests de login y carrito de compras
+
+---
+
+## 💻 Cómo Ejecutar los Ejemplos
+
+### Opción 1: Desde el IDE
+
+1. Abre el proyecto en IntelliJ IDEA, Eclipse o VS Code
+2. Navega a la clase que quieres ejecutar (ej: `Ejemplo01_NavegacionBasica.java`)
+3. Haz clic derecho → Run o ejecuta el método `main()`
+
+### Opción 2: Desde la Terminal
+
+```bash
+# Compilar el proyecto
+gradle build
+
+# Ejecutar un ejemplo específico
+gradle run --args="com.selenium.ejemplos.basicos.Ejemplo01_NavegacionBasica"
+
+# O ejecutar la clase Main
+gradle run
+```
+
+### Opción 3: Ejecutar Tests
+
+```bash
+# Ejecutar todos los tests
+gradle test
+
+# Ejecutar un test específico
+gradle test --tests "TestBasico_GoogleSearch"
+```
+
+---
+
+## 📖 Guía Completa de Conceptos
 
 ---
 
@@ -577,6 +697,43 @@ wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("elemento")));
 - Gradle simplifica la gestión de dependencias y construcción.
 
 **Próximos pasos:** practicar, aplicar POM, explorar TestNG y Selenium Grid, e integrar con CI/CD.
+
+---
+
+## 🛠️ Dependencias del Proyecto
+
+El proyecto utiliza las siguientes dependencias (configuradas en `build.gradle`):
+
+- **Selenium Java 4.16.0** - Framework principal de automatización
+- **WebDriverManager 5.6.2** - Gestión automática de drivers
+- **JUnit Jupiter 5.10.1** - Framework de testing
+
+## 📝 Notas Importantes
+
+- **WebDriverManager** descarga y configura automáticamente los drivers necesarios, por lo que no necesitas descargarlos manualmente.
+- Los ejemplos utilizan **Chrome** como navegador por defecto. Para usar otro navegador, cambia `ChromeDriver()` por `FirefoxDriver()`, `EdgeDriver()`, etc.
+- Algunos ejemplos usan `Thread.sleep()` para visualización. En producción, siempre usa **esperas explícitas** con `WebDriverWait`.
+- Los screenshots se guardan en la carpeta `screenshots/` (se crea automáticamente).
+
+## 🐛 Solución de Problemas
+
+### Error: "chromedriver not found"
+- WebDriverManager debería descargarlo automáticamente. Si falla, verifica tu conexión a internet.
+
+### Error: "Chrome version mismatch"
+- WebDriverManager maneja esto automáticamente. Si persiste, actualiza Chrome a la última versión.
+
+### Los tests fallan intermitentemente
+- Asegúrate de usar esperas explícitas (`WebDriverWait`) en lugar de `Thread.sleep()`.
+- Verifica que los elementos esperados existan en la página.
+
+## 📞 Contribuciones
+
+Este es un proyecto educativo. Siéntete libre de:
+- Agregar más ejemplos
+- Mejorar la documentación
+- Reportar problemas
+- Sugerir mejoras
 
 ---
 
