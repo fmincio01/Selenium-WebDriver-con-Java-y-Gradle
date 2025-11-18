@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Guía Completa: Selenium WebDriver con Java y Gradle</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f7;
+      color: #222;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, #1a73e8, #9333ea);
+      color: white;
+      padding: 2rem 3rem;
+    }
+    header h1 {
+      margin: 0 0 .5rem 0;
+    }
+    header p {
+      margin: .1rem 0;
+    }
+    main {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1.5rem 3rem;
+      background: white;
+      box-shadow: 0 15px 40px rgba(0,0,0,.08);
+      border-radius: 16px;
+    }
+    h1, h2, h3, h4 {
+      color: #1f2933;
+    }
+    h2 {
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: .3rem;
+      margin-top: 2.5rem;
+    }
+    h3 {
+      margin-top: 1.5rem;
+    }
+    code {
+      font-family: "Fira Code", Consolas, "Courier New", monospace;
+      background: #f3f4f6;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-size: .9em;
+    }
+    pre {
+      background: #0b1120;
+      color: #e5e7eb;
+      padding: 1rem 1.2rem;
+      border-radius: 10px;
+      overflow-x: auto;
+      font-size: 0.9em;
+    }
+    pre code {
+      background: transparent;
+      padding: 0;
+    }
+    a {
+      color: #2563eb;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: .95em;
+    }
+    table, th, td {
+      border: 1px solid #e5e7eb;
+    }
+    th, td {
+      padding: 8px 10px;
+      text-align: left;
+    }
+    th {
+      background: #f3f4f6;
+    }
+    .toc ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .toc li {
+      margin: .25rem 0;
+    }
+    .badge {
+      display: inline-block;
+      padding: .15rem .5rem;
+      border-radius: 999px;
+      font-size: .75rem;
+      background: #e5e7eb;
+      color: #374151;
+      margin-left: .25rem;
+    }
+    .tag {
+      display: inline-block;
+      padding: .15rem .45rem;
+      border-radius: 999px;
+      font-size: .75rem;
+      background: #eff6ff;
+      color: #1d4ed8;
+      margin: 2px;
+    }
+    .box {
+      border-left: 4px solid #3b82f6;
+      background: #eff6ff;
+      padding: .75rem 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      font-size: .95em;
+    }
+    .box.warn {
+      border-color: #f59e0b;
+      background: #fffbeb;
+    }
+    .box.success {
+      border-color: #10b981;
+      background: #ecfdf5;
+    }
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: .85rem;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧪 Guía Completa: Selenium WebDriver con Java y Gradle</h1>
+    <p><strong>Asignatura:</strong> Automatización de Pruebas Funcionales</p>
+    <p><strong>Tema:</strong> Introducción al Selenium WebDriver - Parte 1</p>
+    <p><strong>Fecha:</strong> 2025</p>
+  </header>
+
+  <main>
+    <section class="toc">
+      <h2 id="contenido">📋 Tabla de Contenidos</h2>
+      <ul>
+        <li>1. <a href="#introduccion">Introducción a Selenium</a></li>
+        <li>2. <a href="#conceptos">Conceptos Fundamentales</a></li>
+        <li>3. <a href="#arquitectura">Arquitectura de Selenium</a></li>
+        <li>4. <a href="#tipos">Tipos de Selenium</a></li>
+        <li>5. <a href="#drivers">Drivers según Navegador</a></li>
+        <li>6. <a href="#localizadores">Localizadores de Elementos</a></li>
+        <li>7. <a href="#comandos">Comandos Principales</a></li>
+        <li>8. <a href="#configuracion">Configuración del Entorno</a></li>
+        <li>9. <a href="#actividad">Actividad Práctica</a></li>
+        <li>10. <a href="#referencias">Referencias y Recursos</a></li>
+      </ul>
+    </section>
+
+    <h2 id="introduccion">🎯 Introducción a Selenium</h2>
+
+    <h3>¿Qué es Selenium?</h3>
+    <p>
+      Selenium es un <strong>framework de código abierto</strong> diseñado para automatizar pruebas de aplicaciones web. 
+      Permite simular acciones de usuarios en navegadores web reales, lo que lo convierte en una herramienta esencial para el testing funcional.
+    </p>
+
+    <h3>Características Principales</h3>
+    <ul>
+      <li>✅ <strong>Open Source:</strong> Gratuito y con una comunidad activa</li>
+      <li>✅ <strong>Multi-navegador:</strong> Chrome, Firefox, Safari, Edge, Opera</li>
+      <li>✅ <strong>Multi-plataforma:</strong> Windows, Linux, macOS</li>
+      <li>✅ <strong>Multi-lenguaje:</strong> Java, Python, C#, JavaScript, Ruby</li>
+      <li>✅ <strong>Integración CI/CD:</strong> Jenkins, GitLab CI, GitHub Actions, etc.</li>
+    </ul>
+
+    <h3>Casos de Uso</h3>
+    <ol>
+      <li><strong>Pruebas de Regresión:</strong> Verificar que nuevos cambios no afecten funcionalidades existentes.</li>
+      <li><strong>Pruebas Funcionales:</strong> Validar que la aplicación cumple con los requisitos.</li>
+      <li><strong>Pruebas de Humo:</strong> Verificación rápida de funcionalidades críticas.</li>
+      <li><strong>Web Scraping:</strong> Extracción automatizada de datos.</li>
+      <li><strong>Automatización de Tareas:</strong> Procesos repetitivos en navegadores.</li>
+    </ol>
+
+    <h2 id="conceptos">💡 Conceptos Fundamentales</h2>
+
+    <h3>WebDriver</h3>
+    <p>
+      WebDriver es una <strong>interfaz de programación</strong> que permite controlar navegadores web mediante código. 
+      Actúa como un puente entre tu script de prueba y el navegador.
+    </p>
+
+    <h3>Elemento Web (WebElement)</h3>
+    <p>
+      Representa cualquier elemento HTML en una página web (botones, campos de texto, enlaces, etc.). 
+      Se identifican mediante <strong>localizadores</strong>.
+    </p>
+
+    <h3>Navegador Driver</h3>
+    <p>
+      Software específico que permite a Selenium comunicarse con cada navegador. 
+      Cada navegador requiere su propio driver (ChromeDriver, GeckoDriver, etc.).
+    </p>
+
+    <h3>Test Framework</h3>
+    <p>
+      Herramienta para estructurar y ejecutar pruebas (JUnit, TestNG, pytest, etc.).
+    </p>
+
+    <h2 id="arquitectura">🏗️ Arquitectura de Selenium</h2>
+
+    <pre><code>┌─────────────────────────────────────┐
+│   Script de Prueba (Java/Python)   │
+│   - Código de prueba escrito por   │
+│     el desarrollador/tester        │
+└──────────────┬──────────────────────┘
+               │
+               ▼
+┌─────────────────────────────────────┐
+│     Selenium WebDriver API          │
+│   - Comandos estandarizados         │
+│   - Abstracción del navegador       │
+└──────────────┬──────────────────────┘
+               │
+               ▼
+┌─────────────────────────────────────┐
+│    JSON Wire Protocol / W3C         │
+│   - Protocolo de comunicación       │
+└──────────────┬──────────────────────┘
+               │
+       ┌───────┴───────┬───────────┐
+       ▼               ▼           ▼
+┌──────────┐    ┌──────────┐  ┌──────────┐
+│ Chrome   │    │ Firefox  │  │  Edge    │
+│ Driver   │    │ Driver   │  │  Driver  │
+└────┬─────┘    └────┬─────┘  └────┬─────┘
+     │               │             │
+     ▼               ▼             ▼
+┌──────────┐    ┌──────────┐  ┌──────────┐
+│ Chrome   │    │ Firefox  │  │  Edge    │
+│ Browser  │    │ Browser  │  │  Browser │
+└──────────┘    └──────────┘  └──────────┘
+</code></pre>
+
+    <h3>Flujo de Ejecución</h3>
+    <ol>
+      <li>El script envía un comando a la API de Selenium.</li>
+      <li>La API traduce el comando al protocolo del navegador.</li>
+      <li>El driver específico ejecuta el comando en el navegador.</li>
+      <li>El navegador realiza la acción solicitada.</li>
+      <li>El resultado se devuelve al script.</li>
+    </ol>
+
+    <h2 id="tipos">🔧 Tipos de Selenium</h2>
+
+    <h3>1. Selenium IDE 🎬</h3>
+    <p><strong>Características:</strong></p>
+    <ul>
+      <li>Extensión de navegador (Chrome/Firefox).</li>
+      <li>Interfaz gráfica para grabar y reproducir pruebas.</li>
+      <li>No requiere programación.</li>
+    </ul>
+    <p><strong>Ventajas:</strong> fácil de aprender, rápido para pruebas simples.</p>
+    <p><strong>Desventajas:</strong> limitado para proyectos grandes.</p>
+
+    <h3>2. Selenium WebDriver ⭐ (MÁS USADO)</h3>
+    <p><strong>Características:</strong> API programática, control total del navegador, soporta múltiples lenguajes.</p>
+    <p><strong>Ventajas:</strong> flexible, potente, integrable con frameworks y CI/CD.</p>
+    <p><strong>Desventajas:</strong> requiere saber programar.</p>
+
+    <h3>3. Selenium Grid 🌐</h3>
+    <p>Permite <strong>ejecución distribuida</strong> en múltiples máquinas, navegadores y sistemas operativos.</p>
+
+    <h3>4. Selenium RC ⚠️</h3>
+    <p class="box warn"><strong>DEPRECADO:</strong> Reemplazado por WebDriver. No usar en proyectos nuevos.</p>
+
+    <h2 id="drivers">🌐 Drivers según Navegador</h2>
+
+    <h3>ChromeDriver (Google Chrome)</h3>
+    <pre><code>Navegador: Google Chrome
+Driver: chromedriver / chromedriver.exe
+Descarga: https://chromedriver.chromium.org/
+Versión: Debe coincidir con la versión de Chrome
+</code></pre>
+
+    <pre><code class="language-java">// Configuración manual
+System.setProperty("webdriver.chrome.driver", "/ruta/chromedriver");
+WebDriver driver = new ChromeDriver();
+</code></pre>
+
+    <h3>GeckoDriver (Mozilla Firefox)</h3>
+    <pre><code>Navegador: Mozilla Firefox
+Driver: geckodriver / geckodriver.exe
+Descarga: https://github.com/mozilla/geckodriver/releases
+Protocolo: W3C WebDriver
+</code></pre>
+
+    <pre><code class="language-java">System.setProperty("webdriver.gecko.driver", "/ruta/geckodriver");
+WebDriver driver = new FirefoxDriver();
+</code></pre>
+
+    <h3>EdgeDriver (Microsoft Edge)</h3>
+    <pre><code>Navegador: Microsoft Edge
+Driver: msedgedriver / msedgedriver.exe
+Descarga: https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/
+Basado en: Chromium
+</code></pre>
+
+    <pre><code class="language-java">System.setProperty("webdriver.edge.driver", "/ruta/msedgedriver");
+WebDriver driver = new EdgeDriver();
+</code></pre>
+
+    <h3>SafariDriver (Safari - macOS)</h3>
+    <pre><code>Navegador: Safari
+Driver: Incluido en macOS
+Activación: safaridriver --enable
+Plataforma: Solo macOS
+</code></pre>
+
+    <h3>💡 WebDriverManager (Recomendado)</h3>
+    <pre><code class="language-java">// build.gradle
+implementation 'io.github.bonigarcia:webdrivermanager:5.6.2'
+
+// Uso
+WebDriverManager.chromedriver().setup();
+WebDriver driver = new ChromeDriver();
+</code></pre>
+
+    <h2 id="localizadores">🎯 Localizadores de Elementos</h2>
+
+    <p>Los localizadores permiten encontrar elementos en una página web. Selenium ofrece 8 tipos:</p>
+
+    <h3>1. ID (Más confiable y rápido)</h3>
+    <pre><code class="language-java">// HTML: &lt;input id="username" type="text"&gt;
+WebElement elemento = driver.findElement(By.id("username"));
+</code></pre>
+
+    <h3>2. Name</h3>
+    <pre><code class="language-java">// HTML: &lt;input name="email" type="email"&gt;
+WebElement elemento = driver.findElement(By.name("email"));
+</code></pre>
+
+    <h3>3. ClassName</h3>
+    <pre><code class="language-java">// HTML: &lt;button class="btn-primary"&gt;Enviar&lt;/button&gt;
+WebElement elemento = driver.findElement(By.className("btn-primary"));
+</code></pre>
+
+    <h3>4. TagName</h3>
+    <pre><code class="language-java">// HTML: &lt;button&gt;Click&lt;/button&gt;
+WebElement elemento = driver.findElement(By.tagName("button"));
+</code></pre>
+
+    <h3>5. LinkText</h3>
+    <pre><code class="language-java">// HTML: &lt;a href="/login"&gt;Iniciar Sesión&lt;/a&gt;
+WebElement elemento = driver.findElement(By.linkText("Iniciar Sesión"));
+</code></pre>
+
+    <h3>6. PartialLinkText</h3>
+    <pre><code class="language-java">// HTML: &lt;a href="/contact"&gt;Contáctanos ahora&lt;/a&gt;
+WebElement elemento = driver.findElement(By.partialLinkText("Contáctanos"));
+</code></pre>
+
+    <h3>7. CSS Selector ⭐</h3>
+    <pre><code class="language-java">// Por ID
+driver.findElement(By.cssSelector("#username"));
+
+// Por clase
+driver.findElement(By.cssSelector(".btn-primary"));
+
+// Por atributo
+driver.findElement(By.cssSelector("input[name='email']"));
+
+// Combinado
+driver.findElement(By.cssSelector("form#loginForm input[type='password']"));
+</code></pre>
+
+    <h3>8. XPath</h3>
+    <pre><code class="language-java">// Absoluto (no recomendado)
+driver.findElement(By.xpath("/html/body/div[1]/form/input[1]"));
+
+// Relativo (recomendado)
+driver.findElement(By.xpath("//input[@id='username']"));
+
+// Con texto
+driver.findElement(By.xpath("//button[text()='Enviar']"));
+
+// Con contains
+driver.findElement(By.xpath("//div[contains(@class, 'alert')]"));
+</code></pre>
+
+    <h3>📊 Comparación de Localizadores</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Localizador</th>
+          <th>Velocidad</th>
+          <th>Confiabilidad</th>
+          <th>Flexibilidad</th>
+          <th>Recomendación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>ID</td><td>Alta</td><td>Alta</td><td>Media</td><td>Primera opción</td></tr>
+        <tr><td>Name</td><td>Alta</td><td>Media</td><td>Media</td><td>Formularios</td></tr>
+        <tr><td>CSS Selector</td><td>Alta</td><td>Alta</td><td>Alta</td><td>Segunda opción</td></tr>
+        <tr><td>ClassName</td><td>Media</td><td>Media</td><td>Media</td><td>Con cuidado</td></tr>
+        <tr><td>TagName</td><td>Media</td><td>Baja</td><td>Baja</td><td>Casos simples</td></tr>
+        <tr><td>LinkText</td><td>Media</td><td>Media</td><td>Media</td><td>Solo enlaces</td></tr>
+        <tr><td>PartialLinkText</td><td>Media</td><td>Baja</td><td>Media</td><td>Solo enlaces</td></tr>
+        <tr><td>XPath</td><td>Baja</td><td>Media</td><td>Muy alta</td><td>Último recurso</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="comandos">⚙️ Comandos Principales de WebDriver</h2>
+
+    <h3>Navegación</h3>
+    <pre><code class="language-java">// Abrir URL
+driver.get("https://www.ejemplo.com");
+
+// Navegar atrás
+driver.navigate().back();
+
+// Navegar adelante
+driver.navigate().forward();
+
+// Recargar página
+driver.navigate().refresh();
+
+// Navegar a URL (alternativa)
+driver.navigate().to("https://www.ejemplo.com");
+</code></pre>
+
+    <h3>Obtener Información</h3>
+    <pre><code class="language-java">// Título de la página
+String titulo = driver.getTitle();
+
+// URL actual
+String url = driver.getCurrentUrl();
+
+// Código fuente de la página
+String html = driver.getPageSource();
+</code></pre>
+
+    <h3>Interacción con Elementos</h3>
+    <pre><code class="language-java">// Click en elemento
+elemento.click();
+
+// Escribir texto
+elemento.sendKeys("Texto a escribir");
+
+// Limpiar campo
+elemento.clear();
+
+// Teclas especiales
+elemento.sendKeys(Keys.ENTER);
+elemento.sendKeys(Keys.TAB);
+
+// Obtener texto
+String texto = elemento.getText();
+
+// Atributos
+String valor = elemento.getAttribute("value");
+String clase = elemento.getAttribute("class");
+
+// Visibilidad / estado
+boolean visible = elemento.isDisplayed();
+boolean habilitado = elemento.isEnabled();
+boolean seleccionado = elemento.isSelected();
+</code></pre>
+
+    <h3>Gestión de Ventanas</h3>
+    <pre><code class="language-java">// Cerrar ventana actual
+driver.close();
+
+// Cerrar todas las ventanas
+driver.quit();
+
+// Maximizar
+driver.manage().window().maximize();
+
+// Cambiar de ventana
+Set&lt;String&gt; ventanas = driver.getWindowHandles();
+for (String ventana : ventanas) {
+    driver.switchTo().window(ventana);
+}
+</code></pre>
+
+    <h3>Esperas (Waits)</h3>
+    <pre><code class="language-java">// Espera implícita
+driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+// Espera explícita
+WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+WebElement elemento = wait.until(
+    ExpectedConditions.presenceOfElementLocated(By.id("boton"))
+);
+</code></pre>
+
+    <h3>Alertas y Pop-ups</h3>
+    <pre><code class="language-java">Alert alerta = driver.switchTo().alert();
+alerta.accept();
+alerta.dismiss();
+String textoAlerta = alerta.getText();
+alerta.sendKeys("Respuesta");
+</code></pre>
+
+    <h3>Frames e IFrames</h3>
+    <pre><code class="language-java">driver.switchTo().frame(0);
+driver.switchTo().frame("nombreFrame");
+driver.switchTo().defaultContent();
+</code></pre>
+
+    <h3>Cookies</h3>
+    <pre><code class="language-java">Set&lt;Cookie&gt; cookies = driver.manage().getCookies();
+driver.manage().addCookie(new Cookie("nombre", "valor"));
+driver.manage().deleteCookieNamed("nombre");
+driver.manage().deleteAllCookies();
+</code></pre>
+
+    <h3>Screenshots</h3>
+    <pre><code class="language-java">File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+FileUtils.copyFile(screenshot, new File("screenshot.png"));
+</code></pre>
+
+    <h2 id="configuracion">💻 Configuración del Entorno de Pruebas</h2>
+
+    <h3>Requisitos Previos</h3>
+    <ul>
+      <li>Java JDK 11 o superior</li>
+      <li>Gradle 7.x o superior</li>
+      <li>IDE (IntelliJ, Eclipse o VS Code)</li>
+      <li>Navegador (Chrome, Firefox, Edge)</li>
+    </ul>
+
+    <h3>Java JDK</h3>
+    <pre><code class="language-bash">java -version
+javac -version
+</code></pre>
+
+    <h3>Gradle</h3>
+    <pre><code class="language-bash">gradle --version
+</code></pre>
+
+    <h3>Creación de Proyecto con Gradle</h3>
+    <pre><code class="language-bash">mkdir selenium-proyecto
+cd selenium-proyecto
+gradle init
+</code></pre>
+
+    <h3>Ejemplo de build.gradle (resumen)</h3>
+    <pre><code class="language-groovy">plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.pruebas'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.seleniumhq.selenium:selenium-java:4.16.0'
+    implementation 'io.github.bonigarcia:webdrivermanager:5.6.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+application {
+    mainClass = 'com.pruebas.selenium.App'
+}
+</code></pre>
+
+    <h2 id="actividad">📝 Actividad Práctica</h2>
+
+    <p><strong>Objetivo:</strong> Configurar un proyecto de automatización con Selenium WebDriver usando Gradle y Java, e implementar pruebas funcionales básicas.</p>
+
+    <h3>Requisitos de la Actividad</h3>
+    <ul>
+      <li><strong>Configuración del Entorno (30%)</strong> – Java, Gradle, IDE, estructura.</li>
+      <li><strong>Implementación de Pruebas (50%)</strong> – Mínimo 5 casos, diferentes localizadores, esperas explícitas.</li>
+      <li><strong>Documentación (20%)</strong> – README, comentarios, screenshots y reporte.</li>
+    </ul>
+
+    <h3>Ejemplo: Prueba de Búsqueda en Google</h3>
+    <pre><code class="language-java">@Test
+public void pruebaBusquedaGoogle() {
+    // 1. Navegar a Google
+    // 2. Localizar campo de búsqueda
+    // 3. Escribir "Selenium WebDriver"
+    // 4. Presionar Enter
+    // 5. Verificar que hay resultados
+}
+</code></pre>
+
+    <h2 id="referencias">🔗 Referencias y Recursos</h2>
+
+    <h3>Documentación Oficial</h3>
+    <ul>
+      <li><strong>Selenium:</strong> <a href="https://www.selenium.dev/" target="_blank">https://www.selenium.dev/</a></li>
+      <li><strong>Gradle:</strong> <a href="https://gradle.org/" target="_blank">https://gradle.org/</a></li>
+      <li><strong>JUnit 5:</strong> <a href="https://junit.org/junit5/" target="_blank">https://junit.org/junit5/</a></li>
+    </ul>
+
+    <h3>Cheat Sheet Gradle</h3>
+    <pre><code class="language-bash">gradle tasks
+gradle build
+gradle clean
+gradle test
+gradle test --info
+gradle dependencies
+</code></pre>
+
+    <h3>Cheat Sheet WebDriver</h3>
+    <pre><code class="language-java">driver.get(url);
+driver.findElement(By.id("id"));
+element.click();
+element.sendKeys("texto");
+driver.getTitle();
+driver.getCurrentUrl();
+</code></pre>
+
+    <h3>Preguntas Frecuentes (FAQ)</h3>
+    <p><strong>1. ¿Por qué mis pruebas fallan aleatoriamente?</strong></p>
+    <p>Usa esperas explícitas en lugar de <code>Thread.sleep()</code>.</p>
+    <pre><code class="language-java">WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("elemento")));
+</code></pre>
+
+    <p><strong>2. ¿Diferencia entre close() y quit()?</strong></p>
+    <ul>
+      <li><code>close()</code>: Cierra la ventana actual.</li>
+      <li><code>quit()</code>: Cierra todas las ventanas y finaliza la sesión.</li>
+    </ul>
+
+    <h2>🎓 Conclusiones</h2>
+    <ul>
+      <li>Selenium WebDriver es la herramienta líder para automatización de pruebas web.</li>
+      <li>La arquitectura se basa en drivers específicos por navegador.</li>
+      <li>Los localizadores son clave para interactuar con elementos.</li>
+      <li>Las esperas explícitas mejoran la estabilidad de las pruebas.</li>
+      <li>Page Object Model facilita el mantenimiento del código.</li>
+      <li>Gradle simplifica la gestión de dependencias y construcción.</li>
+    </ul>
+
+    <p><strong>Próximos pasos:</strong> practicar, aplicar POM, explorar TestNG y Selenium Grid, e integrar con CI/CD.</p>
+
+  </main>
+
+  <footer>
+    Material educativo para el curso de Automatización de Pruebas Funcionales · Última actualización: Noviembre 2025
+  </footer>
+</body>
+</html>
